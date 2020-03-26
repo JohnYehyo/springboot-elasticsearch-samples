@@ -19,7 +19,6 @@ public class UserEntity {
     private String username;
     private String module;
     private String method;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date actionTime;
 }

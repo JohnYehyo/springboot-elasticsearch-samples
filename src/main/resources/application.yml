@@ -27,8 +27,9 @@ spring:
   #ElasticSearch
   data:
     elasticsearch:
-      cluster-nodes: 127.0.0.1:9300
-      cluster-name: es-application
+      cluster:
+       nodes: 127.0.0.1:9300
+       name: johnyehyo
   devtools:
     livereload:
       enable: true

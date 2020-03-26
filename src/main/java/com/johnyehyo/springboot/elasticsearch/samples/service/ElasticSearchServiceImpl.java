@@ -3,8 +3,9 @@ package com.johnyehyo.springboot.elasticsearch.samples.service;
 import com.johnyehyo.springboot.elasticsearch.samples.dal.ElasticSearchDal;
 import com.johnyehyo.springboot.elasticsearch.samples.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 /**
  * @author JohnYehyo
@@ -17,7 +18,8 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
     private ElasticSearchDal elasticSearchDal;
 
     @Override
-    public Page<UserEntity> searchAll() {
-        return elasticSearchDal.search();
+    public Optional<UserEntity> findAll() {
+        Optional<UserEntity> optional = elasticSearchDal.findById("wZ1d1G4BkQ79OmEIITBH");
+        return optional;
     }
 }

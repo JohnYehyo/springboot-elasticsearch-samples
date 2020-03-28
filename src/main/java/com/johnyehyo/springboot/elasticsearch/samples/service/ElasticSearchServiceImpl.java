@@ -2,6 +2,9 @@ package com.johnyehyo.springboot.elasticsearch.samples.service;
 
 import com.johnyehyo.springboot.elasticsearch.samples.dal.ElasticSearchDal;
 import com.johnyehyo.springboot.elasticsearch.samples.entity.UserEntity;
+import org.elasticsearch.common.unit.Fuzziness;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,5 +24,15 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
     public Optional<UserEntity> findAll() {
         Optional<UserEntity> optional = elasticSearchDal.findById("wZ1d1G4BkQ79OmEIITBH");
         return optional;
+    }
+
+    @Override
+    public Iterable<UserEntity> searchByCondition(String key, String value) {
+        MatchQueryBuilder matchQueryBuilder = new MatchQueryBuilder(key, value);
+        matchQueryBuilder.fuzziness(Fuzziness.AUTO);
+
+//        BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
+        Iterable<UserEntity> result = elasticSearchDal.search(matchQueryBuilder);
+        return result;
     }
 }

@@ -11,4 +11,6 @@ import java.util.Optional;
  */
 public interface ElasticSearchService {
     Optional<UserEntity> findAll();
+
+    Iterable<UserEntity> searchByCondition(String key, String value);
 }

@@ -10,7 +10,25 @@ import java.util.Optional;
  * @date 2020-3-26
  */
 public interface ElasticSearchService {
-    Optional<UserEntity> findAll();
 
+    /**
+     * 查询全部记录
+     * @return
+     */
+    Iterable<UserEntity> findAll();
+
+    /**
+     * 按索引id查询记录
+     * @param id
+     * @return
+     */
+    Optional<UserEntity> findById(String id);
+
+    /**
+     * 按传的key和value查询记录
+     * @param key
+     * @param value
+     * @return
+     */
     Iterable<UserEntity> searchByCondition(String key, String value);
 }

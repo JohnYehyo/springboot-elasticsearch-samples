@@ -27,13 +27,35 @@ public class ElasticSearchController {
     @Autowired
     private ElasticSearchService elasticSearchService;
 
+    /**
+     * 查询全部记录
+     * @return
+     */
     @GetMapping(value = "searchAll")
     public Object searchAll(){
-        Optional<UserEntity> result = elasticSearchService.findAll();
+        Iterable<UserEntity> result = elasticSearchService.findAll();
+        Iterator<UserEntity> users = result.iterator();
+        return users;
+    }
+
+    /**
+     * 按索引id查询记录
+     * @param id
+     * @return
+     */
+    @GetMapping(value = "searchById/{id}")
+    public Object searchAll(@PathVariable String id){
+        Optional<UserEntity> result = elasticSearchService.findById(id);
         UserEntity userEntity = result.get();
         return userEntity;
     }
 
+    /**
+     * 按传的key和value查询记录
+     * @param key
+     * @param value
+     * @return
+     */
     @GetMapping(value = "searchByCondition/{key}/{value}")
     public Object searchByCondition(@PathVariable String key, @PathVariable String value){
         Iterable<UserEntity> result = elasticSearchService.searchByCondition(key, value);
